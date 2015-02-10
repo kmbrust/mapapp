@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">mapapp</string>
+    <string name="app_name">map_app</string>
     <string name="title_activity_maps">Map</string>
     <string name="google_maps_key">AIzaSyDt7tiiJD0XogOAjie95tvO1jqKgfUrXd0</string>
 

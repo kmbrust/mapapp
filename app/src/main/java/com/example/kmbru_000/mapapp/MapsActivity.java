@@ -60,6 +60,8 @@ public class MapsActivity extends FragmentActivity {
                     .getMap();
             // Check if we were successful in obtaining the map.
             if (mMap != null) {
+                mMap = ((SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map))
+                        .getMap();
                 setUpMap();
             }
         }
@@ -88,38 +90,42 @@ public class MapsActivity extends FragmentActivity {
 
         //Get Current Location
         Location myLocation = locationManager.getLastKnownLocation(provider);
+        if(myLocation == null) {
+
+        }
 
         //set map type
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
         //Get latitude of the current location
-        double latitude = myLocation.getLatitude();
+        double latitude = 43.0377; //myLocation.getLatitude();
 
         //Get longitude of the current location
-        double longitude = myLocation.getLongitude();
+        double longitude = 76.1340; //myLocation.getLongitude();
 
         //Create LatLng object for the current location
-        LatLng latLng = new LatLng(latitude, longitude);
+        LatLng latLng = new LatLng(myLocation.getLatitude(), myLocation.getLongitude());
 
         //Show the current location in Google Map
         mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         //Zoom in the Google Map
-        mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
-        mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude))
+        mMap.animateCamera(CameraUpdateFactory.zoomTo(7));
+      /*  mMap.addMarker(new MarkerOptions().position(new LatLng(latitude,longitude))
                 .title("You are here!").snippet("Consider yourself located"));
-
+*/
 
         LatLng myCoordinates = new LatLng(latitude, longitude);
-        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myCoordinates, 12);
+        CameraUpdate yourLocation = CameraUpdateFactory.newLatLngZoom(myCoordinates, 10);
         mMap.animateCamera(yourLocation);
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(myCoordinates)      // Sets the center of the map to LatLng (refer to previous snippet)
-                .zoom(17)                   // Sets the zoom
-                .bearing(90)                // Sets the orientation of the camera to east
+                .zoom(7)                   // Sets the zoom
+                .bearing(0)                // Sets the orientation of the camera to north
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
     }
 }
